@@ -1,9 +1,6 @@
 venv
-temp_blueprints
 .vscode
 __pycache__
 *.zip
 *.csv
 .env
-images
-profile_pics
