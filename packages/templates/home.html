@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+    
+{% block content %}
+  <!-- Page header -->
+  <div class="banner">
+    <div class="banner-text">
+      <span class="smallsite-logo">
+        <strong class="green">C</strong>
+        <strong class="dark-green">A$</strong>
+        <strong class="green">h</strong>
+        <strong class="orange">TracK</strong>
+      </span>
+      <h3>Track. Record. And Plan Your Finances all in One Place!</h3>
+      <a href="{{url_for('users.register')}}"class="bar-btn btn btn-lg bg-primary text-dark">Sign Up Now!</a>
+      <a href="{{url_for('users.login')}}" class="bar-btn btn btn-lg bg-info text-dark">Log In</a>
+    </div>
+    <div class="banner-img">
+      <img src="{{url_for('static', filename='images/shopping.png')}}">
+      <img src="{{url_for('static', filename='images/working.png')}}">
+      <img id="last" src="{{url_for('static', filename='images/piggybank.png')}}">
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div id="about" class="home-heading">About</div>
+  <div class="about-section">
+    <div class="about-text">
+      <div>
+        <logo style="font-size: 0;" class="mr-2">
+        <strong class="green">C</strong>
+        <strong class="dark-green">A$</strong>
+        <strong class="green">h</strong>
+        <strong class="orange">TracK</strong>
+        </logo>
+        is a simple personal finance app that 
+        aims to help you keep your finances in check.
+      </div>
+      <div class="mt-3">
+        With a user-friendly interface, and multiple tools, 
+        Ca$hTrack aims to help you simply your journey to financial mastery!
+      </div> 
+    </div>
+    <img class="about-img" src="{{url_for('static', filename='images/screenshot.png')}}">
+  </div>
+
+
+  <!-- Features Group -->
+  <div class="home-heading">Features</div>
+  <div id ="features" class="features">
+    <div class="features-section">
+      <img class="features-img" src="{{url_for('static', filename='images/budget.png')}}">
+      <h4 class="mt-3">Track Your Spendings and Plan Accordingly</h4>
+      <span class="small">Keep tracks of all your expenses, income and bills in one place. Create budgets goals to help you spend money wisely.</span>
+    </div>
+    <div class="features-section">
+      <img class="features-img-2" src="{{url_for('static', filename='images/interests.png')}}">
+      <h4 class="mt-4 mb-4">Interest Calculator</h4>
+      <span class="small">Our tool allows you to calculate and record your interest money and plan your savings.</span>
+    </div>
+    <div class="features-section features-final">
+      <img class="features-img-2" src="{{url_for('static', filename='images/export.png')}}">
+      <h4 class="mt-3">Export Your Financial Data as CSV</h4>   
+      <span class="small mt-4">Download your financial data as CSV files to continue your financial tracking journey.</span>
+    </div>
+  </div>
+{% endblock %}

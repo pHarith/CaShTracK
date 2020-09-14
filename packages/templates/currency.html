@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change Password
+{% endblock %}
+
+{% block content %}
+<div id="body-form" class="flex">
+    <div class="content-left content-settings">
+        <!--form goes here-->
+        <form action="" method="post">   
+            {{ form.hidden_tag() }}
+            <fieldset class="form_group">
+                <legend class="border-bottom mb-2">Change Password</legend>
+                <div class="form_group mb-3">
+                    {{ form.rate.label(class="form-control-label")}}
+                    {{ form.rate (class="form-control")}}
+                </div>
+                <div class="form_group mb-1">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+                <div class="mt-2">
+                    <table class="table table-striped table-bordered">
+                        <th colspan="2">Exchange Rate to USD</th>
+                    {% for rate in rates.items() %}
+                        <tr>
+                            <td>{{rate[0]}}</td>
+                            <td>{{rate[1]['symbol']}}{{rate[1]['rates']}}</td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="list-group content-side" style="z-index: 0;">
+        <li class="list-group-item list-group-item-dark text-dark">Settings</li>
+        <a href="{{url_for('users.account')}}" class="list-group-item list-group-item-action">
+          Profile Settings
+        </a>
+        <a href="{{url_for('users.change_password')}}" class="list-group-item list-group-item-action">Change Password</a>
+        <a href="#" class="list-group-item list-group-item-action active">Change Currency Type</a>
+        <a href="{{url_for('cashtrack.overview')}}" class="list-group-item list-group-item-action">Return to Dashboard</a>
+    </div>
+</div>
+
+{% endblock %}

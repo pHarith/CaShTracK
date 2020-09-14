@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change Password
+{% endblock %}
+
+{% block content %}
+<div id="body-form" class="flex">
+    <div class="content-left content-settings">
+        <!--form goes here-->
+        <form action="/change_password" method="post">   
+            {{ form.hidden_tag() }}
+            <fieldset class="form_group">
+                <legend class="border-bottom mb-2">Change Password</legend>
+                <div class="form_group mb-4">
+                    {{ form.old_password.label(class="form-control-label") }}
+                    {% if form.old_password.errors %}
+                        {{ form.old_password(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                        <small class="invalid-feedback">
+                        {% for error in form.old_password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                        </small>
+                    {% else %}
+                        {{ form.old_password(class="form-control form-control-md", autocomplete="off") }}
+                    {% endif %}
+                </div>
+                <div class="form_group mb-4">
+                    {{ form.new_password.label(class="form-control-label") }}
+                    {% if form.new_password.errors %}
+                        {{ form.new_password(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                        <small class="invalid-feedback">
+                        {% for error in form.new_password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                        </small>
+                    {% else %}
+                        {{ form.new_password(class="form-control form-control-md", autocomplete="off") }}
+                        <div>
+                            <small class="text text-muted">
+                                Password Must be 6-20 Characters long.
+                            </small>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form_group mb-4">
+                    {{ form.confirm_new_password.label(class="form-control-label") }}
+                    {% if form.confirm_new_password.errors %}
+                        {{ form.confirm_new_password(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                        <small class="invalid-feedback">
+                        {% for error in form.confirm_new_password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                        </small>
+                    {% else %}
+                        {{ form.confirm_new_password(class="form-control form-control-md", autocomplete="off") }}
+                    {% endif %}
+                </div>
+                <span class="form_group mb-1">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                    <span class="small ml-2"><a href="{{url_for('users.reset_request')}}">Forgot Password?</a></span>
+                </span>
+                
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="list-group content-side" style="z-index: 0;">
+        <li class="list-group-item list-group-item-dark text-dark">Settings</li>
+        <a href="{{url_for('users.account')}}" class="list-group-item list-group-item-action">
+          Profile Settings
+        </a>
+        <a href="#" class="list-group-item list-group-item-action active">Change Password</a>
+        <a href="{{url_for('cashtrack.change_currency')}}" class="list-group-item list-group-item-action">Change Currency Type</a>
+        <a href="{{url_for('cashtrack.overview')}}" class="list-group-item list-group-item-action">Return to Dashboard</a>
+    </div>
+</div>
+
+{% endblock %}

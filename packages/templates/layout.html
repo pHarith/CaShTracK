@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Import Google Material Icons-->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+      <!-- Import Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600&display=swap" rel="stylesheet">      
+      <!-- Import Bootstrap Libraries-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+      
+      <!-- Javascript Libraries-->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+      <title>
+          {% block title %}
+          {% endblock %}
+      </title>
+    </head>
+
+    <body>
+      <div id="page">
+        <div id="contents">
+          <nav id="navBar" class="navbar navbar-expand-md navbar-dark" style="background-color: rgb(25, 141, 135);">
+            <!-- Navbar content -->
+            {% if current_user.is_authenticated %}
+              {% set link = 'javascript:void(0)' %}
+            {% else %}
+              {% set link = 'home' %}
+            {% endif %}
+            <a id="sitelogo" class="navbar-brand" href="{{ link }}" onclick="return toogleSidebar();">
+              <strong class="green">C</strong>
+              <strong class="dark-green">A$</strong>
+              <strong class="green">h</strong>
+              <strong class="orange">TracK</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto mt-2">
+                  {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('cashtrack.overview')}}">Dashboard</a></li>
+                  {% endif %}
+                    <li class="nav-item"><a id="dark-mode" href="javascript:void(0);" onclick="return toogleDark();" class="nav-link">Toogle Dark Mode</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-2">
+                  {% if current_user.is_authenticated %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <img class="rounded-circle navbar-img" src="/static/profile_pics/{{ current_user.image_file }}"> 
+                      Account
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <span class="dropdown-account">
+                        <img class="rounded-circle dropdown-img" src="/static/profile_pics/{{ current_user.image_file }}"> 
+                        {{ current_user.username }}
+                      </span>
+                      <div> Currency: {{ g.currency }} ({{ g.code }})</div>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-white" href="{{url_for('users.account')}}">Profile & Settings</a>
+                      <a class="bar-btn btn btn-secondary" href="{{url_for('users.logout')}}">Log Out</a>
+                    </div>
+                  </li>
+                  {% else %}
+                    <a class="bar-btn btn btn-outline-light" href="{{url_for('users.register')}}">Register</a>
+                    <a class="bar-btn btn btn-info" href="{{url_for('users.login')}}">Log In</a>
+                  {% endif %}
+                </ul>
+              </div>
+          </nav>
+
+          <!-- Sidebar that appears in login page-->
+          {% if current_user.is_authenticated %}
+            <div id="Sidebar" class="sidebar-shrink">
+              <header>
+                <div class="navbar-brand">
+                    <strong class="green">C</strong>
+                    <strong class="dark-green">A$</strong>
+                    <strong class="green">h</strong>
+                    <strong class="orange">TracK</strong>
+                </div>
+              </header>
+              <div>
+                <div class="text-light">
+                  <span class="material-icons md-30">build_circle</span>
+                  <span>Tools</span>
+                </div>
+                <a href="{{url_for('cashtrack.transactions')}}">
+                    <span class="material-icons md-30">add_shopping_cart</span>
+                    <span class="text">Transactions</span>
+                </a>
+                <a href="{{url_for('cashtrack.income')}}">
+                    <span class="material-icons md-30">account_balance_wallet</span>
+                    <span class="text">Income</span>
+                </a>
+                <a href="{{url_for('cashtrack.budget')}}">
+                    <span class="material-icons md-30">corporate_fare</span>
+                    <span class="text">Budget</span>
+                </a>
+                <a href="{{url_for('cashtrack.records')}}">            
+                    <span class="material-icons md-30">pie_chart</span>
+                    <span class="text">Records</span>
+                </a>
+                <a href="{{url_for('cashtrack.interest')}}">
+                    <span class="material-icons md-30">calculate</span>
+                    <span class="text">Interest Calculator</span>
+                </a>
+                <a href="{{url_for('cashtrack.download')}}">
+                    <span class="material-icons md-30">get_app</span>
+                    <span class="text">Export csv</span>
+                </a>
+
+                <div class="closeButton">
+                  <a href='javascript:void(0);' id="closeSidebar" onclick="closeSidebar()">
+                    <span class="material-icons md-48">cancel</span>
+                  </a>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+
+          <!-- flashed message section -->
+          <div class="container mt-4" id="flashMessage">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} fade show">
+                            {{ message }}
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            {% endwith %}
+          </div>
+            
+          <!-- Other content section -->
+          {% block content %}{% endblock %}
+
+          <!-- Centered content section-->
+          <main class="container p-5">
+            {% block main %}{% endblock %}
+          </main>
+
+      </div>
+      <!--Footer Section -->
+      <footer id="footer">
+        <!-- Copyright -->
+        <p>&#169;Ca$htrack&#8482; 2020</p>
+      </footer>
+    </div>
+     
+      <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    </body>
+</html>

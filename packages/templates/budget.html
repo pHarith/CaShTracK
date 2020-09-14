@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Budgets
+{% endblock %}
+
+{% block content %}
+    <div class="flex" id="body-form">
+        <div class="content-left">
+            <form action="/budget" method="post">   
+                {{ form.hidden_tag() }}
+                <fieldset class="form_group">
+                    <div class="content-heading bg-info">
+                        <legend class="mb-2">Add Budget Plans</legend>
+                    </div>
+                    <div class="content-section">
+                        <div class="form_group mb-4">
+                            {{ form.amount.label(class="form-control-label") }}
+                            {% if form.amount.errors %}
+                                {{ form.amount(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                                <small class="invalid-feedback">
+                                    {% for error in form.amount.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </small>
+                            {% else %}
+                                {{ form.amount(class="form-control form-control-md", autocomplete="off") }}
+                            {% endif %}
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.category.label(class="form-control-label") }}
+                            <div class="row">
+                                {% for field in form.category %}
+                                    <div class="col-md-5 m-1">
+                                        {{ field (required="required") }} 
+                                        {% set icon = icons[field.label.text] %}
+                                        <span class="material-icons">
+                                            {{ icon }}
+                                        </span>
+                                        {{ field.label(class="form-control-label") }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.startdate.label(class="form-control-label")}}
+                            {% if form.startdate.errors %}
+                                {{ form.startdate(class="form-control is-invalid") }}
+                                <small class="invalid-feedback">
+                                    {% for error in form.startdate.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </small>
+                            {% else %}
+                                {{ form.startdate(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.enddate.label(class="form-control-label")}}
+                            {% if form.enddate.errors %}
+                                {{ form.enddate(class="form-control is-invalid") }}
+                                <small class="invalid-feedback">
+                                    {% for error in form.enddate.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </small>
+                            {% else %}
+                                {{ form.enddate(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.notes.label(class="form-control-label")}}
+                            {{ form.notes(class="form-control") }}
+                        </div>
+                        <div class="form_group mb-1">
+                            {{ form.submit(class="btn btn-outline-info") }}
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="right-section">
+            <div class="content-side right-top">
+                <div id="ongoing" class="content-heading bg-primary">
+                    <legend class="mb-2">Ongoing Budgets</legend>
+                </div>
+            
+                <div class="content-section-right">
+                    {% if length == 0 %}
+                        <span class="text-secondary">You have no ongoing budgets. Add a New One.</span>
+                    {% else %}
+                    <script>
+                        colors = [];
+                    </script>
+                        {% for row in rows %}
+                            {% set color = colors[row['category']] %}
+                            <script>
+                                colors.push('{{color}}');
+                            </script>
+                            {% set percent = (row['amount_used'] / row['amount']) * 100 %}
+                            {% set amount_left = row['amount'] - row['amount_used'] %}
+                            
+                            {% if amount_left < 0 %}
+                                {% set overspent = -1*(amount_left) %}
+                                {% set amount_left = 0 %}
+                                {% set color = 'danger' %}
+                            {% endif %}
+
+                            {% if percent > 100 %}
+                                {% set percent = 100 %}
+                            {% elif percent == 0 %}
+                                {% set percent = 5 %}
+                            {% endif %}
+
+                            <div class="mt-4">
+                                <span class="material-icons">{{ icons[row['category']]}}</span>
+                                <strong>{{row['category']}}</strong>
+                                <span>({{ row['start_date'].strftime('%d/%m') }} - {{row['end_date'].strftime('%d/%m/%Y')}})</span>
+                            </div>
+                            
+                            <small class="progress-label">{{ row['amount'] | convert_currency(g.code) }}</small>
+                            <div class="progress mt-1" style="width:87%; height: 20px;">
+                                <div class="progress-bar bg-{{ colors[row['category']] }}" role="progressbar" aria-valuenow="{{row['amount_used']}}" aria-valuemin="0.0" aria-valuemax="{{row['amount']}}">
+                                    {{ row['amount_used'] | convert_currency(g.code) }}
+                                </div>
+                                
+                                <script>
+                                    let widthPercent = '{{ percent }}';
+                                    $('.progress-bar').css('width', `${widthPercent}%`);
+                                    var i = 0;
+                                    $('.progress-bar').each(function(){
+                                        $(this).css("background-color", colors[i]);
+                                        i++;
+                                    });
+                                </script>
+                            
+                            </div>
+                            <span class="small text-{{color}}">
+                                Amount Left = {{ amount_left | convert_currency(g.code) }}
+                                {% if overspent %}
+                                (Overspent by: {{ overspent | convert_currency(g.code) }})
+                                {% endif %}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="content-side budget-view">
+                <h3>View Expired Budgets</h3>
+                <button class="btn btn-primary" id="budgetbtn" onclick="showExpired();">Show expired budgets</button>
+                <div class="content-section-right hide" id="expired">
+                    {% if length_ex == 0 %}
+                        <span class="text-secondary">You have no expired budgets.</span>
+                    {% endif %}
+                    <script>
+                        colors = [];
+                    </script>
+                    {% for ex in expires %}
+                        {% set color = colors[ex['category']] %}
+                        <script>
+                            colors.push('{{color}}');
+                        </script>
+                        <div class="mt-4">
+                            <span class="material-icons">{{ icons[ex['category']]}}</span>
+                            <strong>{{ ex['category'] }}</strong>
+                            <span>({{ ex['start_date'].strftime('%d/%m') }} - {{ex['end_date'].strftime('%d/%m/%Y')}})</span>
+                        </div>
+                        {% set percent = (ex['amount_used'] / ex['amount']) * 100 %}
+                        {% set amount_left = ex['amount'] - ex['amount_used'] %}
+                        
+                        {% if amount_left < 0 %}
+                            {% set amount_left = 0 %}
+                        {% endif %}
+                        {% if percent > 100 %}
+                            {% set percent = 100 %}
+                        {% endif %}
+
+                        {% if amount_left < 0 %}
+                            {% set overspent = -1*(amount_left) %}
+                            {% set amount_left = 0 %}
+                            {% set color = 'danger' %}
+                        {% endif %}
+
+                        <small class="progress-label">{{ ex['amount'] | convert_currency(g.code) }}</small>
+                        <div class="progress mt-1" style="width:90%; height: 20px;">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ex['amount_used']}}" aria-valuemin="0" aria-valuemax="{{ex['amount']}}">
+                            {{ ex['amount_used'] | convert_currency(g.code) }}
+                            <script>
+                            let widthPercent = Number('{{ percent | tojson }}');
+                            $('.progress-bar').css('width', `${widthPercent}%`);
+                            var i = 0;
+                            $('.progress-bar').each(function(){
+                                $(this).css("background-color", colors[i]);
+                                i++;
+                            });
+                            </script>
+                        </div>
+                        </div>
+                        <span class="small text-{{color}}">
+                            Amount Left = {{ amount_left | convert_currency(g.code) }}
+                            {% if overspent %}
+                            (Overspent by: {{ overspent | convert_currency(g.code) }})
+                            {% endif %}
+                        </span>
+                    {% endfor %}
+                    <div class="text-secondary mt-2">Expired Budgets will be cleared in 30 days.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

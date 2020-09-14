@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reset Password
+{% endblock %}
+
+{% block content %}
+<div id="body-form" class="flex">
+    <div class="content-left content-settings">
+        <h1>Oops. This is not page you're looking for (404).</h1>
+        <img class="error-img" src="{{url_for('static', filename='images/piggy-bank-oops.png')}}">
+        <p>Page not found. Please access another page or return home.</p>
+    </div>
+    
+    <div class="list-group content-side" style="z-index: 0;">
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('cashtrack.overview')}}" class="list-group-item list-group-item-action">
+                Return to Dashboard</a>
+        {% else %}
+            <a href="{{url_for('main.home')}}" class="list-group-item list-group-item-action">
+                Return to Homepage</a>
+            <a href="{{url_for('users.register')}}" class="list-group-item list-group-item-action">
+                Register A New Account</a>
+            <a href="{{url_for('users.login')}}" class="list-group-item list-group-item-action">
+                Log In.</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

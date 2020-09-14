@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Interest Calculator
+{% endblock %}
+
+{% block content %}
+    
+    <div class="flex" id="body-form">
+        <!-- Form Section -->
+        <div class="content-left">
+            {{ form.hidden_tag() }}
+            <form action="" method="post">   
+                {{ form.hidden_tag() }}
+                <fieldset class="form_group">
+                    <div class="content-heading bg-primary">
+                        <legend class="mb-2">Interest Calculator</legend>
+                    </div>
+                    <div class="content-section">
+                    <div class="form_group mb-3">
+                        {{ form.name.label(class="form-control-label") }}
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                            <small class="invalid-feedback">
+                                {% for error in form.amount.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </small>
+                        {% else %}
+                            {{ form.name(class="form-control form-control-md", autocomplete="off", placeholder="Some Bank") }}
+                        {% endif %}
+                    </div>
+                    <div class="form_group mb-3">
+                        {{ form.capital.label(class="form-control-label") }}
+                        {% if form.capital.errors %}
+                            {{ form.capital(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                            <small class="invalid-feedback">
+                                {% for error in form.capital.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </small>
+                        {% else %}
+                            {{ form.capital(class="form-control form-control-md", placeholder=placeholder) }}
+                        {% endif %}
+                    </div>
+                    <div class="form_group mb-3">
+                        {{ form.interest_rate.label(class="form-control-label")}}
+                        {% if form.interest_rate.errors %}
+                            {{ form.interest_rate(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                            <small class="invalid-feedback">
+                                {% for error in form.interest_rate.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </small>
+                        {% else %}
+                            {{ form.interest_rate(class="form-control", placeholder="Interest Rate (%)") }}
+                        {% endif %}
+                    </div>
+                    <div class="form_group mb-3" id="select">
+                        {{ form.type.label(class="form-control-label")}}
+                        {{ form.type (class="form-control")}}
+                    </div>
+                    <div class="form_group mb-3">
+                        {{ form.period.label(class="form-control-label")}}
+                        {{ form.period(class="form-control", placeholder="Period (Years)") }}
+                    </div>
+                    <div class="form_group mb-1">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <!-- Answer section -->
+        <div class="right-section">
+            <div class="content-side right-top">
+                <div class="content-heading bg-secondary">
+                    <legend>Result</legend>
+                </div>
+                <div class="content-section-right">
+                    <p class="mt-3">Your Initial Capital = {{ P | convert_currency(g.code) }}</p>
+                    <p class="mt-2 border-bottom">Your Interest Value = {{ I | convert_currency(g.code) }}</p>
+                    <p class="mt-4">Your Final Amount = {{ A | convert_currency(g.code) }}</p>
+                </div>
+            </div>
+
+            <div class="content-side" style="text-align: center; padding: 40px 20px; margin-top: 20px; width: auto; height: auto;">
+                <h3>View Interest Calculator's History</h3>
+                <a href="{{url_for('cashtrack.interest_history')}}" class="btn btn-primary btn-lg">Show History</a>
+            </div>
+        </div>
+    </div>
+{% endblock%}

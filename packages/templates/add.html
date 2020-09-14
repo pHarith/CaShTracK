@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add {{ title }}
+{% endblock %}
+
+{% if title == 'Income' %}
+    {% set type = 'success' %}
+{% elif title  == 'Transactions' %}
+    {% set type = 'warning' %}
+{% endif %}
+
+{% block content %}
+    <div class="flex" id="body-form">
+        <div class="content-left">
+            <form action="" method="post">   
+                {{ form.hidden_tag() }}
+                <fieldset class="form_group">
+                    <div class="content-heading bg-{{type}}">
+                        <legend class="mb-2">Add {{ title }}</legend>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="form_group mb-4">
+                            {{ form.amount.label(class="form-control-label") }}
+                            {% if form.amount.errors %}
+                                {{ form.amount(class="form-control form-control-md is-invalid", autocomplete="off") }}
+                                <small class="invalid-feedback">
+                                    {% for error in form.amount.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </small>
+                            {% else %}
+                                {{ form.amount(class="form-control form-control-md", autocomplete="off") }}
+                            {% endif %}
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.category.label(class="form-control-label") }}
+                            <div class="row">
+                                {% for field in form.category %}
+                                    <div class="col-md-5 m-1" style="display: inline-block">
+                                        {{ field (required="required") }} 
+                                        {% set icon = icons[field.label.text] %}
+                                        <span class="material-icons">
+                                            {{ icon }}
+                                        </span>
+                                        {{ field.label(class="form-control-label") }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.date.label(class="form-control-label")}}
+                            {{ form.date(class="form-control") }}
+                        </div>
+                        <div class="form_group mb-4">
+                            {{ form.notes.label(class="form-control-label")}}
+                            {{ form.notes(class="form-control") }}
+                        </div>
+                        <div class="form_group mb-1">
+                            {{ form.submit(class="btn btn-outline-info") }}
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="content-side daily-summary">
+            <h4> Daily {{title}} ({{ date }})</h4>
+            {% if length == 0 %}
+                <span class="text-secondary">You have not added any {{ title }} today.</span>
+            {% endif %}
+
+            <table class="mt-4 table table-bordered table-striped">
+                <script>
+                    colors = [];
+                </script>
+                {% for k,v in rows.items() %}
+                    {% set color = colors[k] %}
+                    <script>
+                        colors.push('{{color}}');
+                    </script>
+                    <tr class="text-center">
+                        <td>
+                            <span class="category-rows" style="padding: 3.5px; border-radius: 2px; ">
+                                <span class="material-icons">{{ icons[k] }}</span>
+                                {{ k }}
+                                <script>
+                                    var i = 0;
+                                    $('.category-rows').each(function(){
+                                        $(this).css("background-color", colors[i]);
+                                        i++;
+                                    });
+                                </script>
+                            </span>
+                        </td>
+                        <td>{{ v | convert_currency(g.code) }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

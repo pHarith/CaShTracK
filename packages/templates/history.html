@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title%}
+    {{ title }} History
+{% endblock %}
+
+{% block main %}
+    <div id="body-main">
+        <h2>{{ title }} History</h2>
+        {% if title == 'Interest' %}
+            {% if length == 0 %}
+                {% set class = "disabled" %}
+            {% else %}
+                {% set class = "" %}
+            {% endif %}
+            <button type="button" class="btn btn-primary mb-3"  {{class}} data-toggle="modal" data-target="#exampleModal">
+                Clear History
+            </button>
+            <a class="btn btn-success ml-3 mb-3" href="{{url_for('cashtrack.interest')}}">
+                Return to Calculator
+            </a>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title modal-text" id="exampleModalLabel">Clear History</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body modal-text">
+                            Are you sure you want to clear previous interest calculations?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <form action="/interest_history" method="post">
+                                {{ form.hidden_tag() }}
+                                <div> {{ form.submit(class="btn btn-outline-info")}} </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        {% endif %}
+        <table class="table table-light table-striped table-full">
+            {% if title == 'Transactions' %}
+            <thead>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Notes</th>
+            </thead>
+            <tbody>
+                {% if length == 0 %}
+                    <td class="text-muted" colspan="5">No Transactions Records Yet.</td>
+                {% endif %}
+                <script>
+                    colors = [];
+                </script>
+                {% for row in rows %}
+                    {% set color = colors[row['category']] %}
+                    <script>
+                        colors.push('{{color}}');
+                    </script>
+                    {% if row['type'] == 'Income' %}
+                        {% set type = 'success' %}
+                    {% elif row['type'] == 'Expense' %}
+                        {% set type = 'warning' %}
+                    {% endif %}
+
+                    <tr>
+                        <td>
+                            <span>{{ row['date'] }}</span></td>
+                        <td><span class='bg-{{ type }}'>{{ row['type'] }}</span></td>
+                        <td>   
+                            <span class="category-rows">
+                                <span class="material-icons">
+                                    {{ icons[row['category']] }}
+                                </span>
+                                {{ row['category'] }}  
+                            </span>
+                        </td>          
+                        <script>
+                            var i = 0;
+                            $('.category-rows').each(function(){
+                                $(this).css("background-color", colors[i]);
+                                i++;
+                            });
+                        </script>
+                        <th><span class="text-{{type}}">
+                            {{ row['amount'] | convert_currency(g.code) }}</span>
+                        </th>
+                        <td>{{ row['notes'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            {% else %}
+            <thead>
+                <th>Bank Name</th>
+                <th>Type</th>
+                <th>Initial Capital</th>
+                <th>Interest Rate</th>
+                <th>Period</th>
+                <th>Final Capital</th>
+            </thead>
+            <tbody>
+                {% if length == 0 %}
+                    <td class="text-muted" colspan="6">No Calculations Records Found.</td>
+                {% endif %}
+
+                {% for row in rows %}
+                    {% if row['type'] == 'Simple' %}
+                        {% set type = 'info' %}
+                    {% elif row['type'] == 'Compound' %}
+                        {% set type = 'danger' %}
+                    {% endif %}
+                    <tr>
+                        <td>{{ row['bank_name'] }}</td>
+                        <td><span class='bg-{{ type }}'>{{ row['type'] }}</span></td>
+                        <td>{{ row['initial_capital'] | convert_currency(filter) }}</td>
+                        <td>{{ row['interest_rate'] }} %</td>
+                        <td>{{ row['period'] }}</td>
+                        <td>{{ row['final_capital'] | convert_currency(filter) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}

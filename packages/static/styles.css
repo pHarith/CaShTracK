@@ -1,0 +1,1126 @@
+/* Main block Style*/
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: 90%;
+}
+
+.content-left .form-control{
+    width: 80%;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img{
+    width: 100%;
+}
+
+.container{
+    position: relative;
+    top: 70px;
+    overflow-y: hidden;
+}
+
+/* Styling for each html page */
+html {
+    height: 100%;
+}
+
+body{
+    font-size: 1.15rem;
+    font-family: 'Playfair Display', serif;
+    height: 100vh;
+}
+
+/* Home page */
+
+.home-heading{
+    position: relative;
+    font-size: 2.5rem;
+    margin-left: 4%;
+    margin-top: 50px;;
+}
+
+.about-section{
+    width: 92%;
+    margin: auto;
+    height: auto;
+    display: flex;
+    background: rgba(10, 121, 155, 0.5);
+}
+
+.about-text{
+    width: 50%;
+    padding: 40px 20px 30px 40px;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.about-img{
+    width: 50%;
+    height: auto;
+}
+
+.features{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    font-family: 'Spectral', serif;
+}
+
+.features > div {
+    width: 25%;
+    margin: 10px;
+}
+
+.features-img{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+
+.features-img-2{
+    width: 200px;
+    height: 150px;
+    margin: auto;
+}
+
+.features-section{
+    border: 2px solid #dddddd;
+    box-shadow: 0 -7px #00ffbf;
+    padding: 40px 30px;
+    width: 380px;
+    height: 400px;
+    background-color: rgba(200, 200, 200, 0.8);
+}
+
+.banner{
+    display: flex; 
+    justify-content: space-around; 
+    margin-top: 70px;
+    text-align: center;
+    width: 100%;
+    height: 500px;
+    background-color: rgba(114, 204, 224, 0.8);
+}
+
+.banner-text{
+    width: 50%;
+    padding: 100px 20px;
+    text-align: left;
+}
+
+.banner-text strong{
+    font-size: 5rem;
+    text-align: center;
+}
+
+.banner-img{
+    width: 45%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+/* error pages */
+.error-img{
+    display: block;
+    margin: auto;
+    width: auto;
+    height: 20rem;
+}
+
+.banner-img > img{
+    width: 45%;
+    height: 50%;
+}
+
+#last{
+    width: 55%;
+    height: 70%;
+}
+
+/* Styling for sections on left */
+.content-left {
+    background: #ffffff;
+    border: 2px solid #dddddd;
+    border-radius: 3px;
+    margin: 80px 0 0 130px;
+    width: 41%;
+}
+
+.content-side{
+    background: #ffffff;
+    border: 2px solid #dddddd;
+    border-radius: 3px;
+    margin: 85px 50px 0 70px;
+    height: 100%; margin-right: 1rem; width: 30%;
+}
+
+.content-side.budget-view{
+    text-align: center; 
+    padding: 40px 20px; 
+    margin-top: 20px; 
+    width: auto; 
+    height: auto;
+}
+
+.daily-summary{
+    height: 100%; 
+    width: 35%; 
+    padding: 10px 30px; 
+    margin-left: 150px;
+}
+
+.content-heading{
+    width: 100%;
+    height: 100%;
+}
+
+.content-heading > legend{
+    padding: 0 20px;
+}
+
+.content-section{
+    padding: 10px 0 10px 30px;
+}
+
+.right-section{
+    width: 52%; 
+    height: auto;
+    margin-left: -40px;
+}
+
+.right-top{
+    width: auto; 
+    height: auto;
+}
+
+.content-section-right{
+    padding: 10px 20px;
+}
+
+.flex{
+    display: flex; 
+    justify-content: flex-start;
+}
+
+.flex > #ongoing{
+    flex: 1;
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Styling for sections on right */
+.content-right {
+    position: absolute;
+    top: 90px;
+    right: 0;
+    background: #ffffff;
+    padding: 10px 30px;
+    border: 2px solid #dddddd;
+    border-radius: 3px;
+    margin: 25px 30px 0 200px;
+    width: 30%;
+    height: auto;
+}
+
+/* Dashboard styling */
+.content-overview{
+    margin: 60px 0 0 100px;
+}
+
+.cards{
+    margin-top:100px;
+    display: flex;
+    flex-flow: row;
+}
+
+.content-overview .card{
+    width: 15rem; 
+    height: 10rem;
+    margin: 20px 20px 10px;
+    font-size: 1.1rem;
+}
+/* balance card */
+.card.balance-card{
+    width: 20rem; height: 12rem;
+    margin-left: 10px;
+}
+
+.card-major-text{
+    font-size: 2rem;
+}
+
+.content-overview .records{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.records-upper{
+    display: flex;
+    justify-content: space-between;
+    margin: 90px 15px 0 0;
+}
+
+.records-bottom{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.content-overview .content-graph{
+    position: relative;
+    margin-top: 5px;
+    border: 2px solid #dddddd;
+    width: 35rem;
+    height: 23.5rem;
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+    padding: 10px;
+}
+
+.content-graph.dashboard-container{
+    margin-top: 2px;
+    margin-left: 0.05rem;
+}    
+
+.dashboard-graph{
+    width:100%; 
+    height: 100%; 
+}
+
+.upper-graph{
+    width: 28rem;
+    height: 15rem;
+}
+
+#monthChart{ 
+    width: auto; 
+    height: auto;
+    padding: 5px;
+}
+
+.records-upper > .content-graph{
+    margin-top: 10px;
+    border: 2px solid #dddddd;
+    width: 25rem;
+    height: 20rem;
+    font-size: 1.15rem;
+    margin: 0.5rem;
+    padding: 10px;
+}
+
+.records-bottom > .content-graph{
+    margin-top: 10px;
+    border: 2px solid #dddddd;
+    font-size: 1.15rem;
+    width: 42rem; 
+    height: 25rem; 
+    margin-left: 2rem;
+}
+
+.content-graph.view-records{
+    text-align: center; 
+    padding: 75px 20px; 
+    height: 100%; 
+    width: 25rem; 
+    margin-left: 3rem; 
+    margin-top: 5rem;
+}
+
+.table-short{
+    width: 42rem;
+    font-size: 1.15rem;
+}
+
+.records-table{
+    margin: 0 7px;
+}
+
+#body, #body-form, #body-main{
+    transition: margin-left 0.5s;
+}
+
+.inactive{
+    position: fixed;
+    margin-left:270px;
+    margin-top: -5px;
+    opacity:0.5;
+    z-index:-1;
+}
+
+.inactive-form {
+    position: fixed;
+    margin-left: 190px;
+    margin-top: 10px;
+    width: 100%;
+    opacity:0.5;
+    z-index:-1;
+}
+
+.inactive-table {
+    display: block;
+    position: fixed;
+    width: 100%;
+    margin-left: 100px;
+    opacity:0.5;
+    z-index: -1;
+}
+
+
+.dropdown-account{
+    font-size: 22px;
+    color: white;
+}
+
+.dropdown-img{
+    width: 50px;
+    height: 50px;
+    margin: 0 0.5rem;
+}
+
+.dropdown-menu{
+    font-size: 18px;
+    height: auto;
+    width: auto;
+    background-color: rgba(25, 141, 135, 0.9);
+    color: white;
+    text-align: center;
+}
+
+.dropdown-menu > a{
+    margin-top: 10px;
+}
+
+.dropdown-menu > a:hover{
+    background-image: none;
+    background-color: rgb(32, 34, 35, 0.9);
+}
+
+.bar-btn{
+    margin: 5px 10px;
+    align-items: center;
+}
+
+.content-form{
+    border: 2px solid #dddddd;
+    border-radius: 3px;
+    width: 60%;
+    margin: auto;
+}
+
+.content-settings{
+    padding: 10px 30px;
+}
+
+main fieldset{
+    margin: auto;
+    padding: 1rem;
+}
+
+main legend{
+    text-align: left;
+}
+
+
+/* Styling logo on navbar */
+nav .navbar-brand{
+    font-size: 0;
+    font-family: 'Playfair Display', serif;
+}
+
+.green {
+    color: #0bdfaa;
+    font-size: 2.2rem;
+}
+
+.dark-green{
+    color: #008037;
+    font-size: 2.3rem;
+}
+
+.orange{
+    color: #dda121;
+    font-size: 2.2rem;
+}
+
+/* Fixed Navbar Position */
+#navBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    height: 70px;
+}
+
+#navbar.push{
+    margin-left:250px;
+    opacity:0.5;
+    z-index:-1;
+}
+
+/* Add position:fixed to this to make it float on top of */
+#flashMessage{
+    position: fixed;
+    left: 160px;
+    z-index: 1;
+    transition: 0.5s ease-in-out;
+}
+
+nav{
+    /* Align contents to center in smaller page */
+    text-align: center;
+    display: inline-block;
+    transition: ease-in 0.4s ease-out 0s;
+}
+
+nav .navbar-img{
+    /* Account profile picture on nav bar*/
+    width: 30px;
+    height: 30px;
+    border: 1px transparent #dddddd;
+    text-align: center;
+    margin-right: 5px;
+}
+
+/* Styling account page*/
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 30px;
+    margin-bottom: 16px;
+}
+
+.account-email{
+    font-size: 1.5rem;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
+}
+
+.account-heading {
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 2.5rem;
+}
+
+/* Styling the sidebar in user-page */
+#Sidebar{
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    background-color:  rgb(3, 52, 116);
+    transition: margin-left 0.4s;
+}
+
+#Sidebar header{
+    background-color:  rgba(0, 38, 87, 0.924);
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    top: 0;
+}
+
+.sidebar-shrink{
+    padding-top: 90px;
+    width: 70px;
+    text-align: center;
+}
+
+.sidebar-expand{
+    width: 250px;
+    z-index: 999;
+    padding-top: 80px;
+    background-color:  rgba(22, 76, 146, 0.924);
+    transition: margin-left 0.4s;
+    text-align: left;
+}
+
+#Sidebar > header{
+    text-align: center;
+}
+
+#Sidebar > header > div, #Sidebar > div > a > .text, #closeSidebar{
+    /* Hide sidebar contents */
+    display: none;
+}
+
+#Sidebar > div > a {
+    /* Links in sidebar */
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    line-height: 30px;
+    text-align: inherit;
+}
+
+#Sidebar > div > a:hover{
+    color: white;
+    background-color: rgba(21, 115, 158, 0.733);
+}
+
+.sidebar-shrink > div > a{
+    margin-top: 25px;
+}
+
+.sidebar-expand > div > a{
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+.sidebar-expand > div > .text-light{
+    padding-left: 20px;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.text-active{
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.icons-active{
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.sidebar-expand .rows{
+    font-size: 18px;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+.sidebar-expand .rows:hover{
+    padding-left: 30px;
+    transition: 0.2s smooth;
+}
+
+.closeButton{
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Sidebar icons */
+.material-icons.md-30{font-size: 30px;}
+
+/* Close button in sidebar */
+.material-icons.md-48{font-size: 48px; color: rgba(255, 255, 255, 0.6)}
+.material-icons.md-48:hover{color: red; background: none;}
+
+
+/* Full Table Page */
+.table-full{
+    margin-left: 4%;
+    overflow: none;
+}
+
+.progress-label{
+    float: right;
+    margin-bottom: 20px;
+}
+
+#page{
+    min-height: 100vh;
+    position: relative;
+    display: block;
+}
+
+#contents{
+    min-height: 95vh;
+    padding-bottom: 2.5rem;
+}
+
+#footer{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: -1;
+    background-color: rgba(3, 124, 104, 0.8);
+    text-align: center;
+    color: white;
+}
+
+#footer > p{
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+@media (min-width: 576px) and (max-width: 1332px)
+{
+    #flashMessage{
+        position: fixed;
+        width: 80vw;
+        left: 50px;
+        z-index: 1;
+        transition: 0.5s ease-in-out;
+    }
+
+    #navBar{
+        height: auto;
+    }
+
+    .banner{
+        height: auto;
+    }
+
+    .banner-img > img{
+        width: 50%;
+        height: 45%;
+    }
+
+    .about-section{
+        margin: auto;
+        height: auto;
+        display: block;
+        background: rgba(10, 121, 155, 0.5);
+    }
+    
+    .about-text{
+        width: 100%;
+        padding: 40px 20px 30px 20px;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    
+    .about-img{
+        width: 100%;
+        height: auto;
+    }
+
+    .features{
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: .1rem;
+    }
+    
+    .features > div {
+        width: 90%;
+        height: auto;
+    }
+
+    .features-section{
+        padding: 40px 30px;
+        width: auto;
+        height: auto;
+        background-color: rgba(200, 200, 200, 0.8);
+    }
+
+    .features-final{
+        place-content: center;
+        position: relative;
+        left: 50%;
+    }
+
+    .content-form{
+        width: 90%;
+        height: auto;
+        margin: auto;
+    }
+
+    .table-full{
+        table-layout: fixed;
+        max-width: 500px;
+    }
+
+    .table-full td{
+        font-size: 0.9rem;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        word-wrap: break-word;
+        width: 100%;
+    }
+
+    .table-full th{
+        font-size: 0.85rem;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        word-wrap: break-word;
+        width: 100%;
+    }
+    
+    /* account page */
+    .account-heading {
+        font-size: 1.5rem;
+    }
+    .account-img {
+        margin-right: 10px;
+        width: 80px;
+        height: 80px;
+    }
+    .account-email{
+        font-size: 1.1rem;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        word-wrap: break-word;
+    }
+
+    /* forms page */
+    .flex{
+        display: flex;
+        flex-flow: row;
+        margin-top: 30px;
+    }
+
+    .content-left{
+        width: 70%;
+        margin-left: 6rem;
+        font-size: 0.9rem;
+    }
+
+    .content-side{
+        width: 40%;
+        margin-left: 0.5rem;
+    }
+
+    .right-section{
+        margin-left: 0.5rem;
+    }
+
+    .right-top{
+        width: auto; 
+        height: auto;
+    }
+
+    /* dashboard */
+
+    .cards{
+        margin: 80px 0 0 0;
+        display: flex;
+    }
+    
+    .content-overview .card{
+        width: 400px; 
+        height: auto; 
+        font-size: 1rem;
+        margin: 20px 5px 5px;
+    }
+
+    .content-overview .card h5{
+        font-size: 0.9rem;
+    }
+    
+    .card.balance-card{
+        width: 450px;  
+        margin-left: -10px;
+    }
+
+    .card-major-text{
+        font-size: 1.4rem;
+    }
+
+    .content-overview .records{
+        display: inline-block;
+    }
+    
+    .table-short{
+        margin-top: 30px;
+        margin-left: -5px;
+        width: 33.5rem;
+        font-size: 1rem;
+    }
+
+    .content-graph.dashboard-container{
+        border: 2px solid #dddddd;
+        width: 33.5rem;
+        height: 18rem;
+        font-size: 1.1rem;
+        margin: 30px 0 20px 0px;
+    }    
+
+    /* records page */
+    .content-overview .records{
+        display: block;
+    }
+
+    .records-upper{
+        display: block;
+    }
+    
+    .records-bottom{
+        display: block;
+    }
+
+    .records-upper > .content-graph {
+        margin: 30px auto 0;
+        border: 2px solid #dddddd;
+        width: 30rem;
+        height: 20rem;
+    }
+
+    .records-bottom > .content-graph{
+        margin: 30px auto 0;
+        border: 2px solid #dddddd;
+        width: 30rem; 
+        height: 20rem; 
+    }
+}
+
+/* adjusting for smaller screen sizes*/
+@media screen and (max-width: 576px){
+    #navBar{
+        height: auto;
+    }
+    /* Home page */
+    #flashMessage{
+        position: fixed;
+        left: 0px;
+        z-index: 1;
+        transition: 0.5s ease-in-out;
+    }
+
+    .banner{
+        width: 100%;
+        height: auto;
+        display: inline-block;
+    }
+
+    .banner-text{
+        width: 100%;
+        padding: 100px 20px;
+        text-align: left;
+    }
+
+    .banner-text h3{
+        font-size: 2.2rem;
+    }
+
+    .banner-text strong{
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .banner-img{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .banner-img > img{
+        width: 230px;
+        height: 220px;
+    }
+
+    #last{
+        width: 250px;
+        height: 240px;
+    }
+    
+    .home-heading{
+        position: relative;
+        font-size: 2.5rem;
+        margin-left: 10%;
+        margin-top: 50px;;
+    }
+
+    .about-section{
+        margin: auto;
+        height: auto;
+        display: block;
+        background: rgba(10, 121, 155, 0.5);
+    }
+    
+    .about-text{
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        font-size: 1.2rem;
+        line-height: 1.1rem;
+    }
+    
+    .about-img{
+        width: 100%;
+    }
+
+    .features{
+        display: inline-block;
+    }
+
+    .features > div {
+        width: 65%;
+        margin: auto;
+        margin-top: 30px;
+    }
+
+    .small{
+        font-size: .95rem;
+    }
+
+    /* forms page */
+    .content-form{
+        width: 80%;
+        margin: auto;
+    }
+
+    /* feature forms */
+    .flex{
+        display: block;
+    }
+
+    .content-left{
+        margin: 100px 0 10px 90px;
+        width: 80%;
+    }
+
+    .content-side{
+        margin: 30px 0 10px 90px;
+        width: 80%;
+    }
+
+    
+    
+
+    .content-side.budget-view{
+        width: 80%;
+    }
+
+    .right-section{
+        width: 100%;
+        margin: auto;
+    }
+
+    /* records page */
+
+    .content-overview{
+        margin: 30px 0 10px 0;
+    }
+
+    .records-upper{
+        display: block;
+    }
+    
+    .records-bottom{
+        display: block;
+    }
+
+    .records-upper > .content-graph {
+        margin: 30px 0 0 -20px;
+        border: 2px solid #dddddd;
+        width: 23rem;
+        height: 18rem;
+    }
+
+    .records-bottom > .content-graph{
+        margin: 30px 0 0 -20px;
+        border: 2px solid #dddddd;
+        width: 23rem; 
+        height: 18rem; 
+    }
+
+    /* account page */
+    .account-heading {
+        font-size: 1.5rem;
+    }
+    .account-img {
+        margin-right: 10px;
+        width: 80px;
+        height: 80px;
+    }
+    .account-email{
+        font-size: 1.1rem;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        word-wrap: break-word;
+    }
+
+    body{
+        font-size: 1rem;
+        height: 100%;
+    }
+    /* overview page */
+    #body{
+        margin-left: 25%;
+        margin-right: 5%;
+    }
+
+    .cards{
+        margin: 70px 0 0 -15px;
+        display: inline-block;
+    }
+    
+    .content-overview .card{
+        width: 15rem; 
+        height: 10rem; 
+    }
+
+    .card.balance-card{
+        width: 20rem; 
+        height: 12rem;
+    }
+
+    .card-major-text{
+        font-size: 1.8rem;
+    }
+
+    .content-overview .records{
+        display: inline-block;
+    }
+    
+    .table-short{
+        margin: 30px 0 0 -15px;
+        width: 22rem;
+        font-size: 1rem;
+    }
+
+    .records-table{
+        margin: auto;
+    }
+
+    .content-graph.view-records{
+        text-align: center; 
+        padding: 50px 25px; 
+        width: 73.5vw;
+    }
+
+    .content-graph.dashboard-container{
+        border: 2px solid #dddddd;
+        width: 24rem;
+        height: 18rem;
+        font-size: 1.1rem;
+        margin: 30px 0 0 -30px;
+    }    
+
+    /* history page */
+    main h2{
+        text-align: center;
+    }
+    .table-full{
+        table-layout: fixed;
+        margin-right: 5%;
+        margin-left: 10%;
+    }
+
+    .table-full td{
+        font-size: 0.9rem;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        word-wrap: break-word;
+    }
+}

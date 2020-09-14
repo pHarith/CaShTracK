@@ -1,0 +1,75 @@
+<!-- Backup Template for register made using flask_wtf module-->
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post" class="content-form">   
+        {{ form.hidden_tag() }}
+        <fieldset class="form_group">
+            <legend class="mb-2 border-bottom">Register Now!</legend>
+            <div class="form_group mb-4">
+                {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-md is-invalid", placeholder="Username", autocomplete="off") }}
+                    <small class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    </small>
+                {% else %}
+                    {{ form.username(class="form-control form-control-md", placeholder="Username", autocomplete="off") }}
+                {% endif %}
+                
+            </div>
+            <div class="form_group mb-4">
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-md is-invalid", placeholder="Email", autocomplete="off") }}
+                    <small class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    </small>
+                {% else %}
+                    {{ form.email(class="form-control form-control-md", placeholder="Email", autocomplete="off") }}
+                {% endif %}
+                
+            </div>
+            <div class="form_group mb-4">
+                {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-md is-invalid", placeholder="Password") }}
+                    <small class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    </small>
+                {% else %}
+                    {{ form.password(class="form-control form-control-md", placeholder="Password") }}
+                    <div>
+                        <small class="text text-muted">
+                            Password Must be 6-20 Characters long.
+                        </small>
+                    </div>
+                {% endif %}
+                
+            </div>
+            <div class="form_group mb-4">
+                {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-md is-invalid", placeholder="Confirm Password") }}
+                    <small class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    </small>
+                {% else %}
+                    {{ form.confirm_password(class="form-control form-control-md", placeholder="Confirm Password") }}
+                {% endif %}
+            </div>
+            <div class="form_group mb-1">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </fieldset>
+    </form>
+    <small class="form-text text-muted mt-3">Already Have an Account? <a href="{{url_for('users.login')}}">Sign in</a></small>
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Records
+{% endblock %}
+
+{% block content %}
+    <div class="content-overview" id="body">
+        <div class="records-upper">
+            <!-- Income Summary -->
+            <div class="content-graph">
+                <canvas id="incomeChart" class="upper-graph"></canvas>
+            </div>
+
+            <!-- Expenses Summary -->
+            <div class="content-graph">
+                <canvas id="expenseChart" class="upper-graph"></canvas>
+            </div>
+
+            <!-- Income-Expense Ratio -->
+            <div class="content-graph">
+                <canvas id="ratioChart" class="upper-graph"></canvas>
+            </div>
+        </div>
+
+        <div class="records-bottom">
+            <!-- Transactions Graph Monthly -->
+            <div class="content-graph">
+                <canvas id="monthChart" class="lower-graph"></canvas>
+            </div>
+            
+            <!-- View Transactions History -->
+            <div class="content-graph view-records">
+                <h3>View Transactions History</h3>
+                <p>View all your transactions in a table</p>
+                <a href="{{url_for('cashtrack.transactions_history')}}" class="btn btn-primary">View History</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let incomechart = document.getElementById('incomeChart').getContext('2d');
+        let expensechart = document.getElementById('expenseChart').getContext('2d');
+        let ratiochart = document.getElementById('ratioChart').getContext('2d');
+        let monthchart = document.getElementById('monthChart').getContext('2d');
+        
+        let incomeTotal = expenseTotal = 0;
+        let income_obj = JSON.parse('{{ income | tojson }}');
+        let in_keys = Object.keys(income_obj);
+        let in_values = Object.values(income_obj);
+        for (value of in_values){ incomeTotal += value;};
+        incomeTotal = incomeTotal.toFixed(2)
+
+        let expense_obj = JSON.parse('{{ expense | tojson }}');
+        let ex_keys = Object.keys(expense_obj);
+        let ex_values = Object.values(expense_obj);
+        for (value of ex_values){ expenseTotal += value;};
+        expenseTotal = expenseTotal.toFixed(2)
+
+        let month_obj = JSON.parse('{{ month_data | tojson | safe }}');
+        let mo_keys = Object.keys(month_obj);
+        let mo_values = Object.values(month_obj);
+
+        let color_obj = JSON.parse('{{ colors | tojson | safe }}');
+        let color_keys = Object.keys(color_obj);
+        
+        let inColor = [];
+        let exColor = [];
+        in_keys.forEach(function(element){
+            if (color_keys.indexOf(element) != -1){ inColor.push(color_obj[element]); };
+            });
+        ex_keys.forEach(function(element){
+            if (color_keys.indexOf(element) != -1){ exColor.push(color_obj[element]); };
+            });
+        let income = [];
+        let expense = [];
+        mo_values.forEach(function(element){
+            income.push(element.Income);
+            expense.push(element.Expense);
+        });
+
+        let inChart = new Chart(incomeChart, {
+            type: 'doughnut',
+            data: {
+                labels: in_keys,
+                datasets: [
+                    {
+                        label: 'Income Summary',
+                        data: in_values,
+                        backgroundColor: inColor
+                    } 
+                ],
+            }, 
+            options: {
+                title: {
+                    display: true,
+                    text: 'Income Summary',
+                    fontSize: 25, 
+                    fontFamily: 'Playfair Display'                 
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        let exChart = new Chart(expensechart, {
+            type: 'doughnut',
+            data: {
+                labels: ex_keys,
+                datasets: [
+                    {
+                        label: ['Expense Summary'],
+                        data: ex_values,
+                        backgroundColor: exColor
+                    } 
+                ],
+            }, 
+            options: {
+                title: {
+                    display: true,
+                    text: 'Expense Summary',
+                    fontSize: 25,
+                    fontFamily: 'Playfair Display'                  
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        let raChart = new Chart(ratiochart, {
+            type: 'pie',
+            data: {
+                labels: ['Income', 'Expense'],
+                datasets: [
+                    {
+                        label: ['Ratio'],
+                        data: [incomeTotal, expenseTotal],
+                        backgroundColor: [
+                            'rgba(28, 167, 45, 0.5)',
+                            'rgba(255, 193, 07, 0.5)'
+                        ],
+                    } 
+                ],
+            }, 
+            options: {
+                title: {
+                    display: true,
+                    text: 'Income-Expense Ratio',
+                    fontSize: 25,
+                    fontFamily: 'Playfair Display'               
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        let moChart = new Chart(monthchart, {
+            type: 'bar',
+            data: {
+                labels: mo_keys,
+                datasets: [
+                    {
+                        label: 'Income',
+                        data: income,
+                        backgroundColor: 'rgba(28, 167, 45, 0.2)',
+                        borderColor:'rgba(28, 167, 45, 1)',
+                        borderWidth: 2,
+                    }, 
+
+                    {
+                        label: 'Expenses',
+                        data: expense,
+                        backgroundColor: 'rgba(255, 193, 07, 0.2)',
+                        borderColor: 'rgba(255, 193, 07, 1)',
+                        borderWidth: 2,
+                    }],
+                },
+                options: {
+                    title:{
+                        display: true,
+                        text: 'Monthly Records ({{ month }})',
+                        fontSize: 25,
+                        fontFamily: 'Playfair Display',
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'category'
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+    </script>
+
+{% endblock%}
