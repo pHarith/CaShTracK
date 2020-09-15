@@ -1072,14 +1072,14 @@ nav .navbar-img{
     .records-upper > .content-graph {
         margin: 30px 10px 0 5px;
         border: 2px solid #dddddd;
-        width: 23rem;
+        width: 75vw;
         height: 18rem;
     }
 
     .records-bottom > .content-graph{
         margin: 30px 10px 0 5px;
         border: 2px solid #dddddd;
-        width: 23rem; 
+        width: 75vw;
         height: 18rem; 
     }
 
@@ -1113,7 +1113,7 @@ nav .navbar-img{
     }
 
     .cards{
-        margin: 70px 0 0 -15px;
+        margin: 70px 0 0 5px;
         display: inline-block;
     }
     
@@ -1137,7 +1137,7 @@ nav .navbar-img{
     
     .table-short{
         margin: 30px 10px 0 5px;
-        width: 19rem;
+        width: 75vw;
         font-size: 0.96rem;
     }
 
@@ -1148,12 +1148,12 @@ nav .navbar-img{
     .content-graph.view-records{
         text-align: center; 
         padding: 50px 25px; 
-        width: 73.5vw;
+        width: 75vw;
     }
 
     .content-graph.dashboard-container{
         border: 2px solid #dddddd;
-        width: 24rem;
+        width: 75vw;
         height: 18rem;
         font-size: 1.1rem;
         margin: 30px 10px 0 5px;
@@ -1179,7 +1179,7 @@ nav .navbar-img{
 
     .table-full{
         table-layout: fixed;
-        width: 24rem;
+        width: 90vw;
     }
 
     .table-full td{
