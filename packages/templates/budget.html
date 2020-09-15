@@ -142,7 +142,8 @@
                                 (Overspent by: {{ overspent | convert_currency(g.code) }})
                                 {% endif %}
                             </span>
-                        {% endfor %}
+                            <div class="small text-secondary">Notes: {{ row['notes'] }}</div>
+                        {% endfor %}               
                     {% endif %}
                 </div>
             </div>

@@ -13,12 +13,14 @@
             {% else %}
                 {% set class = "" %}
             {% endif %}
-            <button type="button" class="btn btn-primary mb-3"  {{class}} data-toggle="modal" data-target="#exampleModal">
-                Clear History
-            </button>
-            <a class="btn btn-success ml-3 mb-3" href="{{url_for('cashtrack.interest')}}">
-                Return to Calculator
-            </a>
+            <div class="history-buttons">
+                <button type="button" class="btn btn-primary"  {{class}} data-toggle="modal" data-target="#exampleModal">
+                    Clear History
+                </button>
+                <a class="btn btn-success" href="{{url_for('cashtrack.interest')}}">
+                    Return to Calculator
+                </a>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

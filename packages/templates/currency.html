@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Change Password
+    Change Currency Type
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
         <form action="" method="post">   
             {{ form.hidden_tag() }}
             <fieldset class="form_group">
-                <legend class="border-bottom mb-2">Change Password</legend>
+                <legend class="border-bottom mb-2">Change Currency Type</legend>
                 <div class="form_group mb-3">
                     {{ form.rate.label(class="form-control-label")}}
                     {{ form.rate (class="form-control")}}

@@ -82,6 +82,7 @@ body{
 
 .features > div {
     width: 25%;
+    height: auto;
     margin: 10px;
 }
 
@@ -102,7 +103,7 @@ body{
     box-shadow: 0 -7px #00ffbf;
     padding: 40px 30px;
     width: 380px;
-    height: 400px;
+    height: auto;
     background-color: rgba(200, 200, 200, 0.8);
 }
 
@@ -177,6 +178,14 @@ body{
     height: auto;
 }
 
+.view-interest{
+    text-align: center; 
+    padding: 40px 5px; 
+    margin-top: 20px; 
+    width: auto; 
+    height: auto;
+}
+
 .daily-summary{
     height: 100%; 
     width: 35%; 
@@ -239,11 +248,11 @@ body{
 
 /* Dashboard styling */
 .content-overview{
-    margin: 60px 0 0 100px;
+    margin: 40px 0 0 90px;
 }
 
 .cards{
-    margin-top:100px;
+    margin-top:70px;
     display: flex;
     flex-flow: row;
 }
@@ -425,6 +434,10 @@ body{
     padding: 10px 30px;
 }
 
+.list-group-item-action.active{
+    z-index: 0;
+}
+
 main fieldset{
     margin: auto;
     padding: 1rem;
@@ -527,6 +540,7 @@ nav .navbar-img{
     height: 100%;
     background-color:  rgb(3, 52, 116);
     transition: margin-left 0.4s;
+    overflow-y: auto;
 }
 
 #Sidebar header{
@@ -627,6 +641,18 @@ nav .navbar-img{
 
 
 /* Full Table Page */
+
+.history-buttons{
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.history-buttons > .btn{
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
 .table-full{
     margin-left: 4%;
     overflow: none;
@@ -673,7 +699,7 @@ nav .navbar-img{
     display: block;
 }
 
-@media (min-width: 576px) and (max-width: 1332px)
+@media (min-width: 768px) and (max-width: 1332px)
 {
     #flashMessage{
         position: fixed;
@@ -885,10 +911,21 @@ nav .navbar-img{
 }
 
 /* adjusting for smaller screen sizes*/
-@media screen and (max-width: 576px){
+@media screen and (max-width: 768px){
     #navBar{
         height: auto;
     }
+
+    /* Main block Style*/
+    main .form-control
+    {
+        /* center form controls */
+        display: inline-block;
+
+        /* override Bootstrap's 100% width for form controls */
+        width: 100%;
+    }
+
     /* Home page */
     #flashMessage{
         position: fixed;
@@ -976,7 +1013,10 @@ nav .navbar-img{
     /* forms page */
     .content-form{
         width: 80%;
+        height: auto;
         margin: auto;
+        padding: 5px;
+        padding-bottom: 15px;
     }
 
     /* feature forms */
@@ -985,17 +1025,14 @@ nav .navbar-img{
     }
 
     .content-left{
-        margin: 100px 0 10px 90px;
+        margin: 100px 0 10px 85px;
         width: 80%;
     }
 
     .content-side{
-        margin: 30px 0 10px 90px;
+        margin: 30px 0 10px 85px;
         width: 80%;
     }
-
-    
-    
 
     .content-side.budget-view{
         width: 80%;
@@ -1009,7 +1046,7 @@ nav .navbar-img{
     /* records page */
 
     .content-overview{
-        margin: 30px 0 10px 0;
+        margin: 40px 0 10px 0;
     }
 
     .records-upper{
@@ -1021,14 +1058,14 @@ nav .navbar-img{
     }
 
     .records-upper > .content-graph {
-        margin: 30px 0 0 -20px;
+        margin: 30px 0 0 -30px;
         border: 2px solid #dddddd;
         width: 23rem;
         height: 18rem;
     }
 
     .records-bottom > .content-graph{
-        margin: 30px 0 0 -20px;
+        margin: 30px 0 0 -30px;
         border: 2px solid #dddddd;
         width: 23rem; 
         height: 18rem; 
@@ -1053,6 +1090,8 @@ nav .navbar-img{
     body{
         font-size: 1rem;
         height: 100%;
+        width: 100%;
+        overflow-x: hidden;
     }
     /* overview page */
     #body{
@@ -1084,9 +1123,9 @@ nav .navbar-img{
     }
     
     .table-short{
-        margin: 30px 0 0 -15px;
-        width: 22rem;
-        font-size: 1rem;
+        margin: 30px 10px 0 -30px;
+        width: 19rem;
+        font-size: 0.96rem;
     }
 
     .records-table{
@@ -1110,7 +1149,16 @@ nav .navbar-img{
     /* history page */
     main h2{
         text-align: center;
+        margin-left: 25%;
+        margin-right: 10%;
     }
+    
+    .history-buttons > .btn{
+        margin-top: 0.5rem;
+        margin-left: 25%;
+        margin-right: 10%;
+    }
+
     .table-full{
         table-layout: fixed;
         margin-right: 5%;

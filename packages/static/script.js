@@ -150,4 +150,15 @@ function setdarkmode(){
 
 setdarkmode();
 
-
+$(window).bind('resize', function(){
+    if ($(this).height()<400){
+        $('.dropdown-account').css('display', 'none')
+        $('.dropdown-divider').css('display', 'none')
+        $('.dropdown-currency').css('display', 'none')
+    }
+    else{
+        $('.dropdown-account').css('display', 'block')
+        $('.dropdown-divider').css('display', 'block')
+        $('.dropdown-currency').css('display', 'block')
+    }
+})

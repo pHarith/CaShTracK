@@ -229,7 +229,7 @@ def overview():
 @login_required
 def transactions_history():
     # Getting all transactions linked to user id
-    row = Transactions.query.filter_by(user_id=current_user.id).order_by(Transactions.date.desc())     
+    row = Transactions.query.filter_by(user_id=current_user.id).order_by(Transactions.date.desc(), Transactions.id.desc())     
     return rnd_tmp("history.html", title='Transactions', rows=row, length=row.count(), icons=label_icons, colors=label_colors)
 
 @cashtrack.route("/interest_history", methods=['GET', 'POST'])
@@ -275,14 +275,14 @@ def download():
             'date':transaction.date,
             'type':transaction.type,
             'category':transaction.category,
-            'amount': convert_currency(transaction.amount, g.code),
+            'amount': f'{g.currency}{str(convert_currency_float(transaction.amount, g.code,rates))}',
             'notes': transaction.notes
         })
     for budget in budgets:
         budget_data.append({
             'category': budget.category,
-            'amount': convert_currency(budget.amount, g.code),
-            'amount_used':convert_currency(budget.amount_used, g.code),
+            'amount': f'{g.currency}{str(convert_currency(budget.amount, g.code,rates))}',
+            'amount_used': f'{g.currency}{str(convert_currency(budget.amount_used, g.code,rates))}',
             'startdate': budget.start_date,
             'enddate': budget.end_date,
             'status': budget.status
