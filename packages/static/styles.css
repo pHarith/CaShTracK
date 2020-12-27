@@ -778,16 +778,14 @@ nav .navbar-img{
     }
 
     .table-full td{
-        font-size: 0.9rem;
-        overflow: hidden; 
+        font-size: 0.9rem; 
         text-overflow: ellipsis; 
         word-wrap: break-word;
         width: 100%;
     }
 
     .table-full th{
-        font-size: 0.85rem;
-        overflow: hidden; 
+        font-size: 0.85rem; 
         text-overflow: ellipsis; 
         word-wrap: break-word;
         width: 100%;
@@ -919,7 +917,6 @@ nav .navbar-img{
 
     body{
         width: 100%;
-        height: 100%;
         font-size: 1rem;
         overflow-x: hidden;
     }
@@ -1182,8 +1179,7 @@ nav .navbar-img{
     }
 
     .table-full th, .table-full td{
-        font-size: 0.8rem;
-        overflow: hidden; 
+        font-size: 0.8rem; 
         text-overflow: ellipsis; 
         word-wrap: break-word;
     }

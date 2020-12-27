@@ -26,13 +26,14 @@ sched = BackgroundScheduler(daemon=True)
 sched.add_job(make_exrate_dict, 'interval', args=[rates], minutes=180)
 sched.start()
 
-# Add the currency symbol and code in used for layout
+
 @cashtrack.before_app_request
 def define_currency():
     code = getfilter()
     currency = rates[code]['symbol']
     g.currency = currency
     g.code = code
+
 
 @jinja2.contextfilter
 @cashtrack.app_template_filter()
@@ -41,6 +42,7 @@ def convert_currency(self, value, code):
     ex_rate = float(rates[code]['rates'])
     value_inNew = ex_rate * value
     return str(rates[code]['symbol'] + '{:,.2f}'.format(value_inNew))
+
 
 @cashtrack.route("/transactions", methods=['GET', 'POST'])
 @login_required
@@ -89,6 +91,7 @@ def transactions():
         return redirect(url_for('cashtrack.overview'))
     return rnd_tmp("add.html", form=form, title="Transactions", icons=label_icons, colors=label_colors, rows=today, length=rows.count(), date=date.today())
 
+
 @cashtrack.route("/income", methods=['GET', 'POST'])
 @login_required
 def income():
@@ -101,9 +104,11 @@ def income():
         transactions = Transactions(user_id=current_user.id, amount=amount, type='Income', category=form.category.data, date=form.date.data, notes=form.notes.data)
         db.session.add(transactions)
         db.session.commit()
+
         # Update users Balance
         User.query.get(current_user.id).balance += amount
         db.session.commit()
+
         # Update daily income
         record = DailyRecords.query.filter_by(user_id=current_user.id, date=form.date.data, type='Income').first()
         if record:
@@ -113,10 +118,12 @@ def income():
             new = DailyRecords(user_id=current_user.id, amount=amount, type='Income', date=form.date.data)
             db.session.add(new)
             db.session.commit()
+
         # Redirect user to dashboard
         flash('Income Recorded', 'success')
         return redirect(url_for('cashtrack.overview'))
     return rnd_tmp("add.html", form=form, title="Income", icons=label_icons, colors=label_colors, rows=today, length=rows.count(), date=date.today())
+
 
 @cashtrack.route("/budget", methods=['GET', 'POST'])
 @login_required
@@ -133,6 +140,7 @@ def budget():
         flash('Budget Added!', 'success')
         return redirect(url_for('cashtrack.overview'))
     return rnd_tmp("budget.html", form=form, rows=rows, expires=expired, length=rows.count(), length_ex=expired.count(), icons=label_icons, colors=label_colors)
+
 
 @cashtrack.route("/interest", methods=['GET', 'POST'])
 @login_required
@@ -156,6 +164,7 @@ def interest():
         db.session.add(new)
         db.session.commit()
     return rnd_tmp('interest.html', form=form, P=P, I=I, A=A, placeholder=placeholder)
+
 
 @cashtrack.route("/records")
 @login_required
@@ -232,6 +241,7 @@ def transactions_history():
     row = Transactions.query.filter_by(user_id=current_user.id).order_by(Transactions.date.desc(), Transactions.id.desc())     
     return rnd_tmp("history.html", title='Transactions', rows=row, length=row.count(), icons=label_icons, colors=label_colors)
 
+
 @cashtrack.route("/interest_history", methods=['GET', 'POST'])
 @login_required
 def interest_history():
@@ -245,6 +255,7 @@ def interest_history():
         flash('Interest History Cleared', 'success')
         return redirect(url_for('cashtrack.interest'))
     return rnd_tmp("history.html", title='Interest', form=form, rows=row, length=row.count(), filter=g.code)
+
 
 @cashtrack.route("/download")
 @login_required
@@ -292,6 +303,7 @@ def download():
     write_to_zip('report.zip', ['transactions.csv', 'budgets.csv'])
     file = "../report.zip"
     return send_file(file, as_attachment=True)
+
 
 @cashtrack.route("/currency", methods=['GET', 'POST'])
 @login_required

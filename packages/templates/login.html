@@ -1,5 +1,3 @@
-<!-- Backup Template for login made using flask_wtf module-->
-
 {% extends "layout.html" %}
 
 {% block title %}
@@ -42,7 +40,5 @@
             <button class="btn btn-outline-primary" type="submit">Log In</button>
         </fieldset>
     </form>
-    <small class="form-text text-muted mt-3">Forgot Password?<a href="{{url_for('users.reset_request')}}">&nbspClick Here</a></small>
     <small class="form-text text-muted mt-3">Don't Have an Account?<a href="{{url_for('users.register')}}">&nbspSign Up</a></small>
-
 {% endblock %}
