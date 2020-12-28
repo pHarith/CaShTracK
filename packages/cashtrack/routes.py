@@ -37,7 +37,7 @@ def define_currency():
 
 @jinja2.contextfilter
 @cashtrack.app_template_filter()
-def convert_currency(self, value, code):
+def convert_currency(self, value, code: str):
     """Converts value into one of the currencies in exchange rate dict"""
     ex_rate = float(rates[code]['rates'])
     value_inNew = ex_rate * value
@@ -77,7 +77,7 @@ def transactions():
         else:
             new = DailyRecords(user_id=current_user.id, amount=amount, type='Expense', date=form.date.data)
             db.session.add(new)
-            db.session.commit() 
+            db.session.commit()
 
         # Update if budget for transaction type exists
         budget = Budget.query.filter_by(user_id=current_user.id, category=form.category.data).filter(Budget.status != 'EXPIRED').first()
@@ -204,7 +204,8 @@ def records():
             else:
                 expense.update({transaction.category : trans_amount})          
     return rnd_tmp("records.html", income=income, expense=expense, month_data=weeklyrecord, month=calendar.month_name[date.today().month], colors=label_colors)
-    
+
+
 @cashtrack.route("/overview")
 @login_required
 def overview():
@@ -286,14 +287,14 @@ def download():
             'date':transaction.date,
             'type':transaction.type,
             'category':transaction.category,
-            'amount': f'{g.currency}{str(convert_currency_float(transaction.amount, g.code,rates))}',
+            'amount': f'{g.currency}{str(convert_currency_float(transaction.amount, g.code, rates))}',
             'notes': transaction.notes
         })
     for budget in budgets:
         budget_data.append({
             'category': budget.category,
-            'amount': f'{g.currency}{str(convert_currency(budget.amount, g.code,rates))}',
-            'amount_used': f'{g.currency}{str(convert_currency(budget.amount_used, g.code,rates))}',
+            'amount': f'{g.currency}{str(convert_currency_float(budget.amount, g.code, rates))}',
+            'amount_used': f'{g.currency}{str(convert_currency_float(budget.amount_used, g.code, rates))}',
             'startdate': budget.start_date,
             'enddate': budget.end_date,
             'status': budget.status
