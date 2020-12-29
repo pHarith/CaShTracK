@@ -16,6 +16,9 @@
                     {{ form.rate.label(class="form-control-label")}}
                     {{ form.rate (class="form-control")}}
                 </div>
+                <div class="form_group mb-2 text-muted">
+                    Currency In Use: {{ g.code }}
+                </div>
                 <div class="form_group mb-1">
                     {{ form.submit(class="btn btn-outline-info") }}
                 </div>

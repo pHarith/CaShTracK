@@ -5,6 +5,12 @@ finance web application designed to help users keep track of their
 income and spendings. Users can create profiles and keep track of 
 their money and plan their finances using the tools provided. 
 
+Please install required requirements using the following commands:
+
+> pip install -r requirements.txt
+
+Please read note.txt to obtain the uri and keys to initialize the Flask app.
+
 ## Programming Langugages used: 
 * Python (Flask), 
 * Javascript, 
@@ -16,9 +22,7 @@ their money and plan their finances using the tools provided.
 * Interest Calculator
 * CSV export 
 
-Presentation of the web app can be found here:
-
-Here is the link to the web application: 
+Presentation of the web app can be found here: https://youtu.be/5_oMpPLyXYU
 
 For more info regarding CS50x, please check out the course website with this link: https://cs50.harvard.edu/x/2020/. Thank you CS50 for this amazing journey.
 

@@ -130,7 +130,6 @@ def make_today_transactions(sqlquery):
            result[query.category] += query.amount
         else:
            result.update({query.category : query.amount})
-    print(result)
     return result
 
 def find_weekrange(date):

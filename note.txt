@@ -1,0 +1,11 @@
+# Set the following as your computer system environment variables:
+
+FLASK_SECRET_KEY = '1e82862785a82d48ca0737e38775855e'
+SQL_URI = 'sqlite:///cashtrack.db'
+
+# or go to config.py and replace its contents with the following:
+
+class Config:
+    SECRET_KEY = '1e82862785a82d48ca0737e38775855e'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///cashtrack.db'
+    JSON_SORT_KEYS = False

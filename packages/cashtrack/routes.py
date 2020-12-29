@@ -153,7 +153,6 @@ def interest():
         P = float(form.capital.data)
         i = float(form.interest_rate.data)
         t = float(form.period.data)
-        print(f'{P}, {i}, {t}')
         if str(form.type.data) == 'Simple':
             I = P * (i/100) * t 
             A = I + P
@@ -178,7 +177,6 @@ def records():
     
     # Convert transactions into weekly dictionary
     weekList = find_month_weekrange(date.today())
-    print(weekList)
     for week in weekList:
         weeklyrecord.update({ week : {
             'Income': 0,
@@ -210,7 +208,6 @@ def records():
 @login_required
 def overview():
     """" Renders dashboard """
-    print(g.code)
     daily = DailyRecords.query.filter(extract('day', DailyRecords.date).between(date.today().day-1, date.today().day+1)).filter_by(user_id=current_user.id)
     recentRecord = {}
     for i in range(-1, 2):
